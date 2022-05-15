@@ -8,7 +8,7 @@ env:
   PROJECT_ID: ${{ secrets.GKA_PROJECT }}
   GKE_CLUSTER: cluster-1-tharindu
   GKE_ZONE: us-central1-c
-  DEPLOYMENT_NAME: tharindu-springhello-deployment
+  DEPLOYMENT_NAME: gke-hello-app
   IMAGE: tharindu-springhello-image
   TAG: 1.0.0
 
