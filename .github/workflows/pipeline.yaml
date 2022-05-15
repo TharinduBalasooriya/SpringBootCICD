@@ -47,11 +47,18 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/springhello:latest
-      
-      - id : 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v0"
         with:
-          credentials_json: '${{ secrets.gcp_credentials }}'
+          credentials_json: "${{ secrets.gcp_credentials }}"
 
+      # Setup gcloud CLI
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
 
+      # Get the GKE credentials so we can deploy to the cluster
+      - name: Get the GKE credentials
+      - run: |-
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
