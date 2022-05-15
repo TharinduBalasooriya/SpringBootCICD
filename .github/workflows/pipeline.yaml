@@ -42,6 +42,15 @@ jobs:
           service_acount_key: ${{secrets.GKE_SA_KEY}}
           project_id: ${{secrets.GKA_PROJECT}}
 
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+    
+      - name: Build Docker image
+        run: docker build . -t $IMAGE
+             
+      - name: Push Docker image
+        run: docker push $IMAGE
+
 
 
 
